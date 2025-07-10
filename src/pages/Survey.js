@@ -54,7 +54,7 @@ function Survey() {
       susScore,
     };
 
-    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxuAXfTGnmhW9bf-kfjNHSlHICXgQ8GlRVXWZR45SR0eVQad4i8d73KJD1LzftXODzl/exec", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
