@@ -24,9 +24,9 @@ function Survey() {
   }, []);
 
   const handleChange = (i, value) => {
-    const newRes = [...responses];
-    newRes[i] = parseInt(value);
-    setResponses(newRes);
+    const newResponses = [...responses];
+    newResponses[i] = parseInt(value);
+    setResponses(newResponses);
   };
 
   const calculateSUS = () => {
@@ -44,25 +44,26 @@ function Survey() {
       alert("Mohon isi semua pertanyaan!");
       return;
     }
+
     const susScore = calculateSUS();
     setScore(susScore);
 
     const payload = {
       ...identitas,
       responses,
-      susScore
+      susScore,
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbxuAXfTGnmhW9bf-kfjNHSlHICXgQ8GlRVXWZR45SR0eVQad4i8d73KJD1LzftXODzl/exec", {
+    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
         "Content-Type": "application/json"
       }
     })
-      .then(res => res.text())
-      .then(msg => console.log("Berhasil kirim:", msg))
-      .catch(err => console.error("Gagal kirim:", err));
+    .then(res => res.text())
+    .then(msg => console.log("Berhasil kirim:", msg))
+    .catch(err => console.error("Gagal kirim:", err));
   };
 
   return (
@@ -73,9 +74,11 @@ function Survey() {
       {susQuestions.map((q, i) => (
         <div key={i} style={{ marginBottom: 15 }}>
           <label>{i + 1}. {q}</label><br />
-          <select value={responses[i] ?? ''} onChange={e => handleChange(i, e.target.value)}>
+          <select value={responses[i] ?? ''} onChange={(e) => handleChange(i, e.target.value)}>
             <option value="">Pilih skor (1–5)</option>
-            {[1, 2, 3, 4, 5].map(v => <option key={v} value={v}>{v}</option>)}
+            {[1, 2, 3, 4, 5].map((v) => (
+              <option key={v} value={v}>{v}</option>
+            ))}
           </select>
         </div>
       ))}
