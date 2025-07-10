@@ -64,9 +64,6 @@ function Survey() {
   .then(msg => console.log("Berhasil kirim:", msg))
   .catch(err => console.error("Gagal kirim:", err));
 };
-
-  };
-
   return (
     <div style={{ maxWidth: 700, margin: 'auto', padding: 20 }}>
       <h2>Halo, {identitas.nama}</h2>
